@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  pipelines:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USE_CUDA: "true"  # Измените на "false", если не хотите использовать CUDA
+        USE_CUDA_VER: "cu116"  # Версия CUDA, замените на необходимую
+    ports:
+      - "9099:9099"  # Соответствует порту, указанному в Dockerfile
+    environment:
+      - ENV=prod
+      - HOST=0.0.0.0
+      - PORT=9099
+    volumes:
+      - ./data:/app/data  # Пример тома, измените путь в зависимости от структуры вашего проекта
